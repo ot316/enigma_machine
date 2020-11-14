@@ -1,0 +1,11 @@
+enigma: main.o machine.o
+	g++ -Wall -g main.o machine.o rotor.o -o enigma
+
+machine.o: main.cpp machine.hpp
+	g++ -Wall -g -c machine.cpp
+
+rotor.o: main.cpp rotor.hpp
+	g++ -Wall -g -c rotor.cpp
+
+clean:
+	rm -f *.o enigma 
