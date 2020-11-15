@@ -11,10 +11,15 @@ using namespace std;
 
 class Machine {
 	private:
-		list<Rotor> rotors;
+		Plugboard* plugboard;
+		Reflector* reflector;
+		list<Rotor*> rotors;
+		string rotor_pos;
 	public:
 		// constructor
 		Machine(list<string> config);
+		// Ddestructor
+		~Machine();
 	
 		void encipher(string message);
 };
