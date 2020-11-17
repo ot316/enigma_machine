@@ -2,7 +2,6 @@
 #include"constants.hpp"
 
 #include<iostream>
-
 using namespace std;
 
 Rotor::Rotor(){
@@ -10,6 +9,12 @@ Rotor::Rotor(){
 }
 
 int Rotor::configure(string config, char starting_position) {
+
+	if (config.size() < ALPHABET_LENGTH) {
+		cerr << "Not enough parameters in rotor config file\n";
+		return INVALID_ROTOR_MAPPING;
+	}
+
 	rotation = ALPHABET.find(starting_position);
 	mappings = config.substr(0, ALPHABET_LENGTH);
 	notch_positions = config.substr(ALPHABET_LENGTH, string::npos);
@@ -29,12 +34,10 @@ void Rotor::reverseEncipher(char& ch) {
 
 void Rotor::rotate() {
 	rotation = (rotation + 1) % ALPHABET_LENGTH;
-	int position = ALPHABET[rotation];
-	if (notch_positions.find(position) != string::npos) {
-		cout << "rotation is " << rotation << " and notches are " << notch_positions << endl;
+	auto position = ALPHABET[rotation];
+	if (notch_positions.find(position) != string::npos)
 		if (next)
 			next->rotate();
-	}
 }
 
 int Rotor::checkMappings() {

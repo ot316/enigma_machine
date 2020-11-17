@@ -61,7 +61,7 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 		int alphabet_length = ALPHABET.size();
 		string mapping = {};
 		while (argument_file >> number) {
-			if (number < 0 || number > alphabet_length) {
+			if (number < 0 || number > alphabet_length - 1) {
 				cerr << "Argument '" << argv[i] << "' has invalid index.\n";
 				return INVALID_INDEX;
 			}
@@ -81,8 +81,7 @@ int parseUserInput(string& message) {
 		if(ch >= 'A' && ch <= 'Z')
 			message.push_back(ch);
 		else if(ch != ' ' && ch != '\n' && ch != '-' && ch != '\t' && ch != 13) {
-			cerr << "Invalid Input Character.\n";
-			cerr << ch << endl;
+			cerr << "Invalid Input Character: '" << ch << "'\n";
 			return INVALID_INPUT_CHARACTER;
 		}
 	}

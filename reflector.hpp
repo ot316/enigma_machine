@@ -6,8 +6,10 @@
 class Reflector {
 	string mappings;
 	public:
+		// check the mapping for repeated characters and check if the mapping is complete.
 		int configure(string mapping);
 
+		// encipher a single character
 		void encipher(char& ch);
 };
 

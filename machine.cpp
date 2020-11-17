@@ -7,6 +7,8 @@ using namespace std;
 
 Machine::Machine() {
 	error_code = NO_ERROR;
+	plugboard = nullptr;
+	reflector = nullptr;
 }
 
 Machine::~Machine(){
@@ -17,18 +19,22 @@ Machine::~Machine(){
 }
 
 int Machine::configure(list<string> config) {
+	// read rotor position config.
 	rotor_pos = config.back();
 	config.pop_back();
 
+	// create plugboard.
 	list<string>::iterator it = config.begin();
 	plugboard = new Plugboard;
 	error_code = plugboard->configure(*it++);
 	if(error_code) return error_code;
 
+	// create reflector.
 	reflector = new Reflector;
 	error_code = reflector->configure(*it);
 	if(error_code) return error_code;
 
+	// create as many rotos as necessary.
 	auto i = 0u;
 	while(++it != config.end()) {
 		Rotor* rotor;
@@ -40,6 +46,7 @@ int Machine::configure(list<string> config) {
 
 		rotor = new	Rotor;
 		error_code = rotor->configure(*it, rotor_pos[i++]);
+		if(error_code) return error_code;
 		rotor_list.push_back(rotor);
 	}
 
@@ -72,6 +79,8 @@ void Machine::encipher_char(char& ch) {
 
 	plugboard->encipher(ch);
 
-	rotor_list[0]->rotate();
+	// Recursive function call, base case is the final rotor whos next variable is nullptr
+	if(!rotor_list.empty())
+		rotor_list[0]->rotate();
 }
 
