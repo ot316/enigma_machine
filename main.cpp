@@ -11,13 +11,13 @@
 //function to check and parse user input
 int parseUserInput(string& message);
 
-//function to check and parse arguments
+//function to check and parse command line arguments
 int parseArguments(list<string>& configs, int argc, char** argv);
 
 int main(int argc, char** argv) {
 	int error_code;
 	list<string> machine_config;
-	
+
 	error_code = parseArguments(machine_config, argc, argv);
 	if(error_code) return error_code;
 
@@ -43,7 +43,7 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 	for(auto i = 1; i < argc; i++) {
 		ifstream argument_file;
 		argument_file.open(argv[i]);
-		if(argument_file.fail()) {
+		if(argument_file.fail() || !argument_file.is_open()) {
 			cerr << "Configuration file '" << argv[i] << "' failed to open.\n";
 			return ERROR_OPENING_CONFIGURATION_FILE;
 		}

@@ -1,5 +1,5 @@
 enigma: main.o machine.o rotor.o reflector.o plugboard.o
-	g++ -g -Wall main.o machine.o rotor.o reflector.o plugboard.o -o enigma
+	g++ -g -Wall -Wextra main.o machine.o rotor.o reflector.o plugboard.o -o enigma
 
 main.o: main.cpp machine.hpp constants.hpp
 	g++ -g -Wall -Wextra main.cpp -c
