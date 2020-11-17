@@ -1,13 +1,10 @@
 #ifndef PLUGBOARD_HPP
 #define PLUGBOARD_HPP
 
-#include"cipher.hpp"
+#include"constants.hpp"
 
-class Plugboard:public Cipher {
-	private:
-	string alphabet;
+class Plugboard {
 	string mappings;
-
 	public:
 		int configure(string mapping);
 

@@ -3,7 +3,6 @@
 #include<string>
 #include<list>
 #include<fstream>
-#include<stdexcept>
 #include"machine.hpp"
 #include"rotor.hpp"
 #include"reflector.hpp"
@@ -18,6 +17,7 @@ int parseArguments(list<string>& configs, int argc, char** argv);
 int main(int argc, char** argv) {
 	int error_code;
 	list<string> machine_config;
+	
 	error_code = parseArguments(machine_config, argc, argv);
 	if(error_code) return error_code;
 
@@ -28,6 +28,7 @@ int main(int argc, char** argv) {
 	string message;
 	error_code = parseUserInput(message);
 	if(error_code) return error_code;
+
 	enigma_machine.encipher(message);
 	cout << message << endl;
 	return error_code;

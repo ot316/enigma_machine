@@ -1,13 +1,10 @@
 #ifndef REFLECTOR_HPP
 #define REFLECTOR_HPP
 
-#include"cipher.hpp"
+#include"constants.hpp"
 
-class Reflector:public Cipher {
-	private:
-	string alphabet = ALPHABET;
+class Reflector {
 	string mappings;
-
 	public:
 		int configure(string mapping);
 

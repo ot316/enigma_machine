@@ -1,10 +1,10 @@
 #include"plugboard.hpp"
+#include"constants.hpp"
 #include<string>
 #include<iostream>
 using namespace std;
 
 int Plugboard::configure(string config) {
-	// cout << "plugboard configured with " << config << endl;
 	for (auto i = 0u; i < config.size(); i++) {
 		for (auto j = i + 1; j < config.size(); j++) {
 			if (config[i] == config[j]) {
@@ -22,7 +22,7 @@ int Plugboard::configure(string config) {
 }
 
 void Plugboard::encipher(char& ch) {
-	int index = mappings.find(ch);
+	unsigned int index = mappings.find(ch);
 	if (index != string::npos) {
 		if (index % 2 == 0)
 			ch = mappings[index + 1];

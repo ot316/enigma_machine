@@ -11,20 +11,27 @@
 using namespace std; 
 
 class Machine {
-	private:
+
+		int error_code;
 		Plugboard* plugboard;
 		Reflector* reflector;
 		vector<Rotor*> rotor_list;
 		string rotor_pos;
-		int error_code = NO_ERROR;
+
 	public:
-		// Ddestructor
+		// Constructor sets error code to 0.
+		Machine();
+
+		// Destructor deletes all components of the machine.
 		~Machine();
 
+		// configure the machine with the config list.
 		int configure(list<string> config);
 
+		// Encipher a string.
 		void encipher(string& message);
 
+		// Helper function to encipher an individual character.
 		void encipher_char(char& ch);
 };
 

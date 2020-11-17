@@ -1,4 +1,5 @@
 #include"reflector.hpp"
+#include"constants.hpp"
 #include<string>
 #include<iostream>
 using namespace std;
@@ -12,7 +13,7 @@ int Reflector::configure(string config) {
 			}
 		}
 	}
-	if (config.size() != 26) {
+	if (config.size() != ALPHABET_LENGTH) {
 		cerr << "Reflector mapping is malformed\n";
 		return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
 	}
