@@ -13,7 +13,7 @@ class Rotor {
 	int checkMappings();
 
 	public:
-		//next rotor in chain.
+		// next rotor in chain.
 		Rotor* next;
 
 		// Constructor initialises next as null pointer.
@@ -25,10 +25,10 @@ class Rotor {
 		// Reverse enciphers a single character.
 		void reverseEncipher(char& ch);
 
-		//configure the rotor and check the mappings/
+		// Configure the rotor and check the mappings/
 		int configure(string config, char starting_position);
 
-		// recursive function rotates the rotor and calls rotate on the 
+		// Recursive function rotates the rotor and calls rotate on the 
 		// next motor should a notch match up with the current position.
 		// Base case is the final rotor whos next variable is nullptr.
 		void rotate();

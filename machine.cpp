@@ -1,9 +1,8 @@
 #include"machine.hpp"
+
 #include<string>
 #include<list>
 #include<iostream>
-
-using namespace std;
 
 Machine::Machine() {
 	error_code = NO_ERROR;
@@ -12,6 +11,7 @@ Machine::Machine() {
 }
 
 Machine::~Machine(){
+	// Free up memory on exit
 	delete plugboard;
 	delete reflector;
 	for (auto i = 0u; i << rotor_list.size(); i++) 
@@ -19,22 +19,22 @@ Machine::~Machine(){
 }
 
 int Machine::configure(list<string> config) {
-	// read rotor position config.
+	// Read rotor position config.
 	rotor_pos = config.back();
 	config.pop_back();
 
-	// create plugboard.
+	// Create plugboard.
 	list<string>::iterator it = config.begin();
 	plugboard = new Plugboard;
 	error_code = plugboard->configure(*it++);
 	if(error_code) return error_code;
 
-	// create reflector.
+	// Create reflector.
 	reflector = new Reflector;
 	error_code = reflector->configure(*it);
 	if(error_code) return error_code;
 
-	// create as many rotos as necessary.
+	// Create as many rotos as necessary.
 	auto i = 0u;
 	while(++it != config.end()) {
 		Rotor* rotor;
@@ -50,7 +50,7 @@ int Machine::configure(list<string> config) {
 		rotor_list.push_back(rotor);
 	}
 
-	// point each rotor to the next rotor
+	// Point each rotor to the next rotor, exceot the last one.
 	for (auto i = 0u; i < rotor_list.size(); i++)
 		rotor_list[i]->next = rotor_list[i+1];
 
@@ -59,11 +59,11 @@ int Machine::configure(list<string> config) {
 
 void Machine::encipher(string& message) {
 	for (char& ch: message) {
-		encipher_char(ch);
+		encipherChar(ch);
 	}
 }
 
-void Machine::encipher_char(char& ch) {
+void Machine::encipherChar(char& ch) {
 
 	plugboard->encipher(ch);
 
@@ -79,7 +79,7 @@ void Machine::encipher_char(char& ch) {
 
 	plugboard->encipher(ch);
 
-	// Recursive function call, base case is the final rotor whos next variable is nullptr
+	// Recursive function call, base case is the final rotor whos 'next' variable is nullptr
 	if(!rotor_list.empty())
 		rotor_list[0]->rotate();
 }

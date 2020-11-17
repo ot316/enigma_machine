@@ -15,6 +15,7 @@ int Rotor::configure(string config, char starting_position) {
 		return INVALID_ROTOR_MAPPING;
 	}
 
+	// Rotate to starting position and parse the config string
 	rotation = ALPHABET.find(starting_position);
 	mappings = config.substr(0, ALPHABET_LENGTH);
 	notch_positions = config.substr(ALPHABET_LENGTH, string::npos);

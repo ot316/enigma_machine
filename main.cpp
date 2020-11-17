@@ -1,18 +1,21 @@
-#include<iostream>
 #include"errors.h"
-#include<string>
-#include<list>
-#include<fstream>
 #include"machine.hpp"
 #include"rotor.hpp"
 #include"reflector.hpp"
 #include"plugboard.hpp"
+
+#include<iostream>
+#include<string>
+#include<list>
+#include<fstream>
+
 
 //function to check and parse user input
 int parseUserInput(string& message);
 
 //function to check and parse command line arguments
 int parseArguments(list<string>& configs, int argc, char** argv);
+
 
 int main(int argc, char** argv) {
 	int error_code;
@@ -33,6 +36,7 @@ int main(int argc, char** argv) {
 	cout << message << endl;
 	return error_code;
 }
+
 
 int parseArguments(list<string>& configs, int argc, char** argv) {
 	if(argc < 4) {
@@ -55,13 +59,14 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 				return NON_NUMERIC_CHARACTER;
 			}
 		}
+		// Close and reopen file to check the numbers are valid
 		argument_file.close();
 		argument_file.open(argv[i]);
 		int number;
 		int alphabet_length = ALPHABET.size();
 		string mapping = {};
 		while (argument_file >> number) {
-			if (number < 0 || number > alphabet_length - 1) {
+			if (number < 0 || number >= alphabet_length) {
 				cerr << "Argument '" << argv[i] << "' has invalid index.\n";
 				return INVALID_INDEX;
 			}
@@ -74,6 +79,7 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 	}
 	return NO_ERROR;
 }
+
 
 int parseUserInput(string& message) {
 	char ch;

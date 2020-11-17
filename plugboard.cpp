@@ -3,9 +3,9 @@
 
 #include<string>
 #include<iostream>
-using namespace std;
 
 int Plugboard::configure(string config) {
+
 	// check for repeated characters
 	for (auto i = 0u; i < config.size(); i++) {
 		for (auto j = i + 1; j < config.size(); j++) {
@@ -15,6 +15,7 @@ int Plugboard::configure(string config) {
 			}
 		}
 	}
+
 	// check that there are an even number of parameters
 	if (config.size() % 2 == 1) {
 		cerr << "Plugboard mapping is incomplete, there is an odd number of parameters.\n";

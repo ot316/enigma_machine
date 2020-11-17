@@ -4,6 +4,7 @@
 #include"rotor.hpp"
 #include"reflector.hpp"
 #include"plugboard.hpp"
+
 #include<list>
 #include<string>
 #include<vector>
@@ -31,8 +32,10 @@ class Machine {
 		// Encipher a string.
 		void encipher(string& message);
 
-		// Helper function to encipher an individual character.
-		void encipher_char(char& ch);
+		// Helper function to encipher an individual character 
+		// by passing it through each of the components in sequence
+		// and then back again.
+		void encipherChar(char& ch);
 };
 
 #endif
