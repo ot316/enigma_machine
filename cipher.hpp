@@ -13,9 +13,12 @@ const int ALPHABET_LENGTH = 26;
 
 class Cipher {
 	string alphabet = ALPHABET;
-	string mapping;
+	string mappings;
 	public:
-		void encipher(char& ch);
+		int rotation;
+		Cipher* next;
+		// void encipher(char& ch);
+		virtual void rotate(){};
 
 		char to_letter(int num);
 

@@ -1,9 +1,9 @@
 #include "cipher.hpp"
 
-void Cipher::encipher(char& ch) {
-	int index = alphabet.find(ch);
-	ch = mapping[index];
-}
+// void Cipher::encipher(char& ch) {
+// 	int index = alphabet.find(ch);
+// 	ch = this->mappings[index];
+// }
 
 int Cipher::to_number(char ch) {
 	return static_cast<int>(ch - 'A');

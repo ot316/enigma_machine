@@ -9,11 +9,9 @@ class Plugboard:public Cipher {
 	string mappings;
 
 	public:
-	
-		//constructor
-		Plugboard(string mapping);
+		int configure(string mapping);
 
-		void check_config(string mappings);
+		void encipher(char& ch);
 };
 
 #endif

@@ -5,12 +5,13 @@
 
 class Reflector:public Cipher {
 	private:
-	string alphabet;
+	string alphabet = ALPHABET;
 	string mappings;
+
 	public:
-	
-		//constructor
-		Reflector(string mapping);
+		int configure(string mapping);
+
+		void encipher(char& ch);
 };
 
 #endif

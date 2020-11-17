@@ -7,26 +7,23 @@ class Rotor:public Cipher {
 	private:
 	int initial_offset;
 	string config;
+	string alphabet = ALPHABET;
 	string mappings;
-	string alphabet;
 	string notch_positions;
 	int notch_position;
-	int rotations;
+	int rotation;
 	bool rotate_next_rotor = 0;
 
 	public:
-	
-		//constructor
-		Rotor(string mapping, char starting_position);
+		void encipher(char& ch);
 
-		//reset the rotor to its original state before any rotations
-		void reset();
-		
+		void reverse_encipher(char& ch);
+
 		//check the mappings provided are valid
-		void check_mappings(string mappings);
+		int configure(string config, char starting_position);
 
 		//rotate
-		void rotate(char offset);
+		void rotate();
 };
 
 #endif
