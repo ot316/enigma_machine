@@ -28,17 +28,16 @@ int main(int argc, char** argv) {
 	error_code = enigma_machine.configure(machine_config);
 	if(error_code) return error_code;
 
+	char ch;
+	string message = {};
 	while(!cin.eof()){
-		char ch;
-		string message = {};
 		cin.get(ch);
-
 		error_code = parseUserInput(ch, message);
 		if(error_code) return error_code;
-
-		enigma_machine.encipher(message);
-		cout << message;
 	}
+
+	enigma_machine.encipher(message);
+	cout << message << endl;
 
 	return error_code;
 }
