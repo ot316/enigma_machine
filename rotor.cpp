@@ -3,9 +3,7 @@
 
 #include<iostream>
 #define C(i) (i + 'A')
-#define O(ch) (ch - 'A')
-#define SHIFTED_O(ch) ((O(ch) + rotation) % ALPHABET_LENGTH)
-#define SHIFTED_C(i) C((i - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH)
+#define SHIFTED_C(i) ((i - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH) + 'A'
 using namespace std;
 
 Rotor::Rotor(){
@@ -23,9 +21,6 @@ int Rotor::configure(string config, char starting_position) {
 	rotation = ALPHABET.find(starting_position);
 	mappings = config.substr(0, ALPHABET_LENGTH);
 	for(auto i = 0u; i < ALPHABET_LENGTH; i++) {
-		charsMap[i] = ALPHABET.find(mappings[i]);
-	}
-	for(auto i = 0u; i < ALPHABET_LENGTH; i++) {
 		reverseCharsMap[ALPHABET.find(mappings[i])] = i;
 	}
 	notch_positions = config.substr(ALPHABET_LENGTH, string::npos);
@@ -33,18 +28,15 @@ int Rotor::configure(string config, char starting_position) {
 	return checkMappings();
 }
 
+
 void Rotor::encipher(char& ch) {
-	ch = SHIFTED_C(charsMap[SHIFTED_O(ch)]);
-	// reverseEncipher(ch);
-	//int index = ALPHABET.find(ch);
-	//ch = charsMap[(ALPHABET_LENGTH + index + rotation) % ALPHABET_LENGTH];
+	ch = mappings[(ch + 'A' + rotation) % ALPHABET_LENGTH] - 'A';
+	ch = ((ch - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH) + 'A';
 }
 
 void Rotor::reverseEncipher(char& ch) {
-	ch = SHIFTED_C(reverseCharsMap[SHIFTED_O(ch)]);
-
-	//int index = mappings.find(ch);
-	//ch = ALPHABET[(ALPHABET_LENGTH + index - rotation) % ALPHABET_LENGTH];
+	ch = reverseCharsMap[(ch + 'A' + rotation) % ALPHABET_LENGTH];
+	ch = ((ch - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH) + 'A';
 }
 
 

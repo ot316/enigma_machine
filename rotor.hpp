@@ -6,10 +6,10 @@
 class Rotor {
 	private:
 	string mappings;
+	string reverse_mappings;
 	string notch_positions;
-	int rotation;
 	int reverseCharsMap[26];
-	int charsMap[26];
+	int rotation;
 	// helper function to check the mappings provided are complete and valid.
 	int checkMappings();
 
@@ -25,6 +25,9 @@ class Rotor {
 
 		// Reverse enciphers a single character.
 		void reverseEncipher(char& ch);
+
+		// helper function for reversing a string
+		string reverse(string mapping);
 
 		// Configure the rotor and check the mappings/
 		int configure(string config, char starting_position);
