@@ -25,7 +25,7 @@ int Rotor::configure(string config, char starting_position) {
 
 void Rotor::encipher(char& ch) {
 	int index = ALPHABET.find(ch);
-	ch = mappings[(index + rotation) % ALPHABET_LENGTH];
+	ch = (mappings[(index + rotation) % ALPHABET_LENGTH] - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH;
 }
 
 void Rotor::reverseEncipher(char& ch) {
