@@ -49,11 +49,11 @@ void Rotor::reverseEncipher(char& ch) {
 
 
 void Rotor::rotate() {
-	// rotation = (rotation + 1) % ALPHABET_LENGTH;
-	// auto position = ALPHABET[rotation];
-	// if (notch_positions.find(position) != string::npos)
-	// 	if (next)
-	// 		next->rotate();
+	rotation = (rotation + 1) % ALPHABET_LENGTH;
+	auto position = ALPHABET[rotation];
+	if (notch_positions.find(position) != string::npos)
+		if (next)
+			next->rotate();
 }
 
 int Rotor::checkMappings() {
