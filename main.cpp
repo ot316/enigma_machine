@@ -11,7 +11,7 @@
 
 
 //function to check and parse user input
-int parseUserInput(string& message);
+int parseUserInput(char ch, string& message);
 
 //function to check and parse command line arguments
 int parseArguments(list<string>& configs, int argc, char** argv);
@@ -28,12 +28,18 @@ int main(int argc, char** argv) {
 	error_code = enigma_machine.configure(machine_config);
 	if(error_code) return error_code;
 
-	string message;
-	error_code = parseUserInput(message);
-	if(error_code) return error_code;
+	while(!cin.eof()){
+		char ch;
+		string message = {};
+		cin.get(ch);
 
-	enigma_machine.encipher(message);
-	cout << message << endl;
+		error_code = parseUserInput(ch, message);
+		if(error_code) return error_code;
+
+		enigma_machine.encipher(message);
+		cout << message;
+	}
+
 	return error_code;
 }
 
@@ -81,15 +87,13 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 }
 
 
-int parseUserInput(string& message) {
-	char ch;
-	while(cin.get(ch)) {
-		if(ch >= 'A' && ch <= 'Z')
-			message.push_back(ch);
-		else if(ch != ' ' && ch != '\n' && ch != '-' && ch != '\t' && ch != 13) {
-			cerr << "Invalid Input Character: '" << ch << "'\n";
-			return INVALID_INPUT_CHARACTER;
-		}
+int parseUserInput(char ch, string& message) {
+	if(ch >= 'A' && ch <= 'Z')
+		message.push_back(ch);
+	else if(ch != ' ' && ch != '\n' && ch != '-' && ch != '\t' && ch != 13) {
+		cerr << " Invalid Input Character: '" << ch << "'\n";
+		return INVALID_INPUT_CHARACTER;
 	}
-	return NO_ERROR;
+	return NO_ERROR; 
+
 }
