@@ -20,12 +20,12 @@ int Rotor::configure(string config, char starting_position) {
 	}
 
 	// Rotate to starting position and parse the config string
-	rotation = 0; //ALPHABET.find(starting_position);
+	rotation = ALPHABET.find(starting_position);
 	mappings = config.substr(0, ALPHABET_LENGTH);
-	for( int i = 0; i < ALPHABET_LENGTH; i++) {
+	for(auto i = 0u; i < ALPHABET_LENGTH; i++) {
 		charsMap[i] = ALPHABET.find(mappings[i]);
 	}
-	for( int i = 0; i < ALPHABET_LENGTH; i++) {
+	for(auto i = 0u; i < ALPHABET_LENGTH; i++) {
 		reverseCharsMap[ALPHABET.find(mappings[i])] = i;
 	}
 	notch_positions = config.substr(ALPHABET_LENGTH, string::npos);

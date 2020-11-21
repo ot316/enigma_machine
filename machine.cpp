@@ -3,6 +3,7 @@
 #include<string>
 #include<list>
 #include<iostream>
+#include<algorithm>
 
 Machine::Machine() {
 	error_code = NO_ERROR;
@@ -49,9 +50,10 @@ int Machine::configure(list<string> config) {
 		if(error_code) return error_code;
 		rotor_list.push_back(rotor);
 	}
+	reverse(rotor_list.begin(), rotor_list.end());
 
 	// Point each rotor to the next rotor, exceot the last one.
-	for (auto i = 0u; i < rotor_list.size(); i++)
+	for (auto i = 0u; i < rotor_list.size()-1; i++)
 		rotor_list[i]->next = rotor_list[i+1];
 
 	return error_code;
@@ -65,7 +67,10 @@ void Machine::encipher(string& message) {
 
 void Machine::encipherChar(char& ch) {
 
-	int abs_val = ch - 65;
+	// Recursive function call, base case is the final rotor whos 'next' variable is nullptr
+	if(!rotor_list.empty())
+		rotor_list[0]->rotate();
+
 	plugboard->encipher(ch);
 
 	for (auto i = 0u; i < rotor_list.size(); i++) {
@@ -80,8 +85,6 @@ void Machine::encipherChar(char& ch) {
 
 	plugboard->encipher(ch);
 
-	// Recursive function call, base case is the final rotor whos 'next' variable is nullptr
-	if(!rotor_list.empty())
-		rotor_list[0]->rotate();
+
 }
 
