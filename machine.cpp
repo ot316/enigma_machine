@@ -65,6 +65,7 @@ void Machine::encipher(string& message) {
 
 void Machine::encipherChar(char& ch) {
 
+	int abs_val = ch - 65;
 	plugboard->encipher(ch);
 
 	for (auto i = 0u; i < rotor_list.size(); i++) {

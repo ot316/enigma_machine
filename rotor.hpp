@@ -8,7 +8,8 @@ class Rotor {
 	string mappings;
 	string notch_positions;
 	int rotation;
-
+	int reverseCharsMap[26];
+	int charsMap[26];
 	// helper function to check the mappings provided are complete and valid.
 	int checkMappings();
 
