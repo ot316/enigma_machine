@@ -29,16 +29,13 @@ class Machine {
 		// configure the machine with the config list.
 		int configure(list<string> config);
 
-		// Encipher a string.
-		void encipher(string& message);
-
 		// point each rotor to the next rotor, except the last one.
 		void linkRotors();
 
-		// Helper function to encipher an individual character 
+		// Encipher an individual character 
 		// by passing it through each of the components in sequence
 		// and then back again.
-		void encipherChar(char& ch);
+		void encipher(char& ch);
 };
 
 #endif

@@ -58,13 +58,7 @@ int Machine::configure(list<string> config) {
 	return error_code;
 }
 
-void Machine::encipher(string& message) {
-	for (char& ch: message) {
-		encipherChar(ch);
-	}
-}
-
-void Machine::encipherChar(char& ch) {
+void Machine::encipher(char& ch) {
 
 	// Recursive function call, base case is the final rotor whos 'next' variable is nullptr
 	if(!rotor_list.empty())

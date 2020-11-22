@@ -6,6 +6,11 @@
 using namespace std;
 
 int Reflector::configure(string config) {
+	// check the mapping for a even number of characters
+	if (config.size() % 2 == 1) {
+		cerr << "Incorrect (odd) number of mappings in reflector file.\n";
+		return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
+	}
 	// check the mapping for repeated characters
 	for (auto i = 0u; i < config.size(); i++) {
 		for (auto j = i + 1; j < config.size(); j++) {
@@ -17,7 +22,7 @@ int Reflector::configure(string config) {
 	}
 	// check that the mapping is complete
 	if (config.size() != ALPHABET_LENGTH) {
-		cerr << "Reflector mapping is malformed.\n";
+		cerr << "Insufficient number of mappings in reflector file.\n";
 		return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
 	}
 	mappings = config;

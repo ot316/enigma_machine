@@ -10,8 +10,8 @@
 #include<fstream>
 
 
-//function to check and parse user input
-int parseUserInput(string& message);
+//function to check user input
+int checkUserInput(char ch);
 
 //function to check and parse command line arguments
 int parseArguments(list<string>& configs, int argc, char** argv);
@@ -28,20 +28,23 @@ int main(int argc, char** argv) {
 	error_code = enigma_machine.configure(machine_config);
 	if(error_code) return error_code;
 
-	string message;
-	error_code = parseUserInput(message);
-	if(error_code) return error_code;
+	while(!cin.eof()){
+		char ch;
+		cin >> ws >> ch;
 
-	enigma_machine.encipher(message);
-	cout << message << endl;
+		error_code = checkUserInput(ch);
+		if(error_code) return error_code;
+
+		enigma_machine.encipher(ch);
+		cout << ch;
+	}
 	return error_code;
-
 }
 
 
 int parseArguments(list<string>& configs, int argc, char** argv) {
 	if(argc < 4) {
-		cerr << "Insufficient number of parameters.\n";
+		cerr << "Insufficient number of parameters, usage is: enigma plugboard-file reflector-file (<rotor-file>)* rotor-positions\n";
 		return(INSUFFICIENT_NUMBER_OF_PARAMETERS);
 	}
 
@@ -56,7 +59,7 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 		char ch;
 		while (argument_file.get(ch)) {
 			if (!isdigit(ch) && ch != ' ' && ch != '\n' && ch != '-' && ch != '\t' && ch != 13) {
-				cerr << "The argument '" << argv[i] << "' has a non numeric character.\n";
+				cerr << "The file '" << argv[i] << "' has a non numeric character.\n";
 				return NON_NUMERIC_CHARACTER;
 			}
 		}
@@ -82,16 +85,10 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 }
 
 
-int parseUserInput(string& message) {
-	char ch;
-	while(cin.get(ch)) {
-		if(ch >= 'A' && ch <= 'Z')
-			message.push_back(ch);
-		else if(ch != ' ' && ch != '\n' && ch != '-' && ch != '\t' && ch != 13) {
-			cerr << "Invalid Input Character: '" << ch << "'\n";
-			return INVALID_INPUT_CHARACTER;
-		}
+int checkUserInput(char ch) {
+	if(ch < 'A' || ch > 'Z'){
+		cerr << "Invalid Input Character: '" << ch << "'\n";
+		return INVALID_INPUT_CHARACTER;
 	}
 	return NO_ERROR;
 }
-
