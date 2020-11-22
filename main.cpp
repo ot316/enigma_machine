@@ -28,10 +28,9 @@ int main(int argc, char** argv) {
 	error_code = enigma_machine.configure(machine_config);
 	if(error_code) return error_code;
 
-	while(!cin.eof()){
-		char ch;
-		cin >> ws >> ch;
-
+	char ch;
+	while(cin >> ws >> ch){
+		
 		error_code = checkUserInput(ch);
 		if(error_code) return error_code;
 
