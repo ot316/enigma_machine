@@ -58,7 +58,7 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 		char ch;
 		while (argument_file.get(ch)) {
 			if (!isdigit(ch) && ch != ' ' && ch != '\n' && ch != '-' && ch != '\t' && ch != 13) {
-				cerr << "The file '" << argv[i] << "' has a non numeric character.\n";
+				cerr << "The file '" << argv[i] << "' has a non-numeric character.\n";
 				return NON_NUMERIC_CHARACTER;
 			}
 		}
