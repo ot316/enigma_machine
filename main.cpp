@@ -86,7 +86,7 @@ int parseArguments(list<string>& configs, int argc, char** argv) {
 
 int checkUserInput(char ch) {
 	if(ch < 'A' || ch > 'Z'){
-		cerr << "Invalid Input Character: '" << ch << "'\n";
+		cerr << "Invalid Input Character: '" << ch << "'. Inputs must be upper case letters A-Z.\n";
 		return INVALID_INPUT_CHARACTER;
 	}
 	return NO_ERROR;
