@@ -32,6 +32,9 @@ class Machine {
 		// Encipher a string.
 		void encipher(string& message);
 
+		// point each rotor to the next rotor, except the last one.
+		void linkRotors();
+
 		// Helper function to encipher an individual character 
 		// by passing it through each of the components in sequence
 		// and then back again.

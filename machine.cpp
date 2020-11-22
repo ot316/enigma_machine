@@ -53,10 +53,7 @@ int Machine::configure(list<string> config) {
 
 	reverse(rotor_list.begin(), rotor_list.end());
 
-	// Point each rotor to the next rotor, exceot the last one.
-	if(!rotor_list.empty())
-		for (auto i = 0u; i < rotor_list.size()-1; i++)
-			rotor_list[i]->next = rotor_list[i+1];
+	linkRotors();
 
 	return error_code;
 }
@@ -86,7 +83,12 @@ void Machine::encipherChar(char& ch) {
 	}
 
 	plugboard->encipher(ch);
+}
 
+void Machine::linkRotors(){
+	if(!rotor_list.empty())
+		for (auto i = 0u; i < rotor_list.size()-1; i++)
+			rotor_list[i]->next = rotor_list[i+1];
 
 }
 

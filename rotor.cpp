@@ -2,8 +2,6 @@
 #include"constants.hpp"
 
 #include<iostream>
-#define C(i) (i + 'A')
-#define SHIFTED_C(i) ((i - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH) + 'A'
 using namespace std;
 
 Rotor::Rotor(){
@@ -21,7 +19,7 @@ int Rotor::configure(string config, char starting_position) {
 	rotation = ALPHABET.find(starting_position);
 	mappings = config.substr(0, ALPHABET_LENGTH);
 	for(auto i = 0u; i < ALPHABET_LENGTH; i++) {
-		reverseCharsMap[ALPHABET.find(mappings[i])] = i;
+		reverseCharsMap[ALPHABET.find(mappings[i])] = i + 'A';
 	}
 	notch_positions = config.substr(ALPHABET_LENGTH, string::npos);
 
@@ -34,8 +32,9 @@ void Rotor::encipher(char& ch) {
 	ch = ((ch - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH) + 'A';
 }
 
+
 void Rotor::reverseEncipher(char& ch) {
-	ch = reverseCharsMap[(ch + 'A' + rotation) % ALPHABET_LENGTH];
+	ch = reverseCharsMap[(ch + 'A' + rotation) % ALPHABET_LENGTH] - 'A';
 	ch = ((ch - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH) + 'A';
 }
 
