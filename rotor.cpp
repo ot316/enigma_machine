@@ -19,7 +19,7 @@ int Rotor::configure(string config, char starting_position) {
 	rotation = ALPHABET.find(starting_position);
 	mappings = config.substr(0, ALPHABET_LENGTH);
 	for(auto i = 0u; i < ALPHABET_LENGTH; i++) {
-		reverseCharsMap[ALPHABET.find(mappings[i])] = i + 'A';
+		reverseCharsMap[ALPHABET.find(mappings[i])] = i;
 	}
 	notch_positions = config.substr(ALPHABET_LENGTH, string::npos);
 
@@ -34,7 +34,7 @@ void Rotor::encipher(char& ch) {
 
 
 void Rotor::reverseEncipher(char& ch) {
-	ch = reverseCharsMap[(ch + 'A' + rotation) % ALPHABET_LENGTH] - 'A';
+	ch = reverseCharsMap[(ch + 'A' + rotation) % ALPHABET_LENGTH];
 	ch = ((ch - rotation + ALPHABET_LENGTH) % ALPHABET_LENGTH) + 'A';
 }
 

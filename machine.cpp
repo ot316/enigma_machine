@@ -35,7 +35,7 @@ int Machine::configure(list<string> config) {
 	error_code = reflector->configure(*it);
 	if(error_code) return error_code;
 
-	// Create as many rotos as necessary.
+	// Create as many rotors as necessary.
 	auto i = 0u;
 	while(++it != config.end()) {
 		Rotor* rotor;
